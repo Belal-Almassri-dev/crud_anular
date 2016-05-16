@@ -1,0 +1,30 @@
+<section class="card list">
+
+	<h1>Assessment 1</h1>
+    
+    <form name="myform"
+    novalidate>
+        <label>Add ID</label><input type="number" ng-model="userID" ng-required="true">
+        <p ng-show="(users.id|filter:1:true).length > 0">ID exist in array</p>
+         <label>Add Forename</label><input type="text" ng-model="userForename" ng-required="true">
+        <label>Add Surname</label><input type="text" ng-model="userSurname" ng-required="true">      
+        <label>Add Email</label><input type="text" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" ng-model="userEmail" ng-required="true">
+        <button  type="submit" class="btn"
+        ng-disabled="myform.$invalid" ng-click="addUser()">Add <i class="icon-plus"></i></button>
+        <button  class="btn" ng-click="updateUser()">Update</button>
+    </form>
+    
+    <h2>Total users {{ getTotalUsers() }}</h2>
+    <label>Search</label><input type="text" ng-model="search.forename">
+    <table class="table table-striped">
+        <tr ng-repeat="user in users | filter:search">
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.forename }}</td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.created }}</td>
+            <td><a ng-click="deleteUser($index)">delete</a></td>
+        </tr>    
+    </table>
+
+</section>
